@@ -90,7 +90,7 @@
                                        <ul>
                                           <li><a href="https://www.facebook.com/profile.php?id=61577324431845" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                                           <li><a href="https://github.com/Haneef-Ur-Rahman" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></li>
-                                          <li><a href="https://www.linkedin.com/in/haneef-ur-rahman-85006433b"  target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                          <li><a href="https://www.linkedin.com/company/107524650/admin/dashboard/"  target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                                           <li><a href="https://www.instagram.com/hiozon_nexus/"  target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                                        </ul>
                                     </div>
@@ -505,5 +505,33 @@
             });
          });
       </script>
+      <script>
+    // Disable right-click
+    document.addEventListener("contextmenu", function (e) {
+      e.preventDefault();
+    });
+  </script>
+
+  <script>
+    // Disable inspect shortcuts
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "F12") {
+        e.preventDefault();
+      }
+      if (
+        (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key.toUpperCase())) ||
+        (e.ctrlKey && ["U", "S", "P"].includes(e.key.toUpperCase()))
+      ) {
+        e.preventDefault();
+      }
+    });
+  </script>
+
+  <script>
+    // Disable drag events
+    document.addEventListener("dragstart", function (e) {
+      e.preventDefault();
+    });
+  </script>
    </body>
 </html>
