@@ -232,7 +232,7 @@ button {
     width: 100%;
     float: left;
     background-image: url(../images/Banner-background3.png);
-    height: 800px;
+    height: 850px;
     background-size: 100%;
     background-repeat: no-repeat;
 }
@@ -353,7 +353,7 @@ button {
 .video_bt {
     width: 100%;
     float: left;
-    padding-top: 120px;
+    padding-top: 100px;
     padding-left: 20px;
 }
 
