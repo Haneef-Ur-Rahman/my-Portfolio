@@ -508,16 +508,6 @@
             });
          });
 
-         const firebaseConfig = {
-        apiKey: "AIzaSyBQE2k5okbmOWChl0IV5hbQxvDdP0tV5B4",
-        authDomain: "todo-86428.firebaseapp.com",
-        projectId: "todo-86428",
-        storageBucket: "todo-86428.appspot.com",
-        messagingSenderId: "998777510251",
-        appId: "1:998777510251:web:604a33d482b080b0f2942e",
-        measurementId: "G-Z4XW79WYWB"
-    };
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
@@ -549,7 +539,7 @@ async function contactExtraction(e) {
         const message = document.getElementById("feedback").value;
 
         try {
-            await addDoc(collection(db, "contacts"), {
+    const docRef = await addDoc(collection(db, "contacts"), {
                 name,
                 email,
                 phone,
@@ -557,7 +547,7 @@ async function contactExtraction(e) {
                 timestamp: serverTimestamp()
             });
             alert("Message sent successfully!");
-            e.target.reset();
+            document.getElementById("contactForm").reset();
         } catch (error) {
             console.error("Error sending message:", error);
             alert("Error! Could not send your message.");
