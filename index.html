@@ -483,7 +483,9 @@
       <!-- sidebar -->
       <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="js/custom.js"></script>
-      <script>
+      <script type="module">
+
+         
          $('#myCarousel').carousel({
             interval: false
          });
@@ -512,6 +514,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebas
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+import { getDatabase, ref, push, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
     // Firebase config
    const firebaseConfig = {
@@ -537,14 +540,16 @@ async function contactExtraction(e) {
         const email = document.getElementById("EMAIL").value;
         const phone = document.getElementById("CONTACTNUMBER").value;
         const message = document.getElementById("feedback").value;
+       try {
+            const contactsRef = ref(db, "contacts");
+            const newContactRef = push(contactsRef);
 
-        try {
-    const docRef = await addDoc(collection(db, "contacts"), {
+            await addDoc(collection(db, "contacts"), {
                 name,
                 email,
                 phone,
                 message,
-                timestamp: serverTimestamp()
+                timestamp: Date.now()
             });
             alert("Message sent successfully!");
             document.getElementById("contactForm").reset();
