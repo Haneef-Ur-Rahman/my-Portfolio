@@ -424,10 +424,10 @@
 <!--                      <form class="col-md-12" action="https://formsubmit.co/hiozonnexus@gmail.com" method="POST"> -->
                         <form class="col-md-12" id="contactForm">
                          <div class="mail_section_1">
-                            <input type="text" class="mail_text" name="name" placeholder="Your Name" required>
-                            <input type="email" class="mail_text" name="email" placeholder="Your Email" required>
-                              <input type="text" class="mail_text" name="phone" placeholder="Your Phone">
-                                 <textarea class="massage-bt" name="message" placeholder="Your Message" required></textarea> <br><br>
+                            <input type="text" class="mail_text" name="name" placeholder="Your Name" id="NAME" required>
+                            <input type="email" class="mail_text" name="email" placeholder="Your Email" id="EMAIL" required>
+                              <input type="text" class="mail_text" name="phone" placeholder="Your Phone" id="CONTACTNUMBER" required>
+                                 <textarea class="massage-bt" name="message" placeholder="Your Message" required id="feedback"></textarea> <br><br>
                            <div class="send_bt"> 
                                <button type="submit" class="send_bt contactNow-sendButton" > Send Now </button>
                             </div>
@@ -518,10 +518,10 @@
         measurementId: "G-Z4XW79WYWB"
     };
 
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";    
-    import { initializeApp } from "firebase/app";
-    import { getAnalytics } from "firebase/analytics";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
     // Firebase config
    const firebaseConfig = {
@@ -539,13 +539,14 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
     // Form submit handler
-    document.getElementById("contactForm").addEventListener("submit", async (e) => {
+    document.getElementById("contactForm").addEventListener("submit", contactExtraction)
+async function contactExtraction(e) {
         e.preventDefault();
 
-        const name = e.target.name.value.trim();
-        const email = e.target.email.value.trim();
-        const phone = e.target.phone.value.trim();
-        const message = e.target.message.value.trim();
+        const name = document.getElementById("NAME").value;
+        const email = document.getElementById("EMAIL").value;
+        const phone = document.getElementById("CONTACTNUMBER").value;
+        const message = document.getElementById("feedback").value;
 
         try {
             await addDoc(collection(db, "contacts"), {
@@ -555,7 +556,6 @@ const analytics = getAnalytics(app);
                 message,
                 timestamp: serverTimestamp()
             });
-
             alert("Message sent successfully!");
             e.target.reset();
         } catch (error) {
