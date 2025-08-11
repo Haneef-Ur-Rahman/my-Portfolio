@@ -29,8 +29,7 @@
       <!-- font awesome css -->
       <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>
+   
 
    </head>
    <body>
@@ -485,6 +484,45 @@
       <script src="js/custom.js"></script>
       <script type="module">
 
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDWpSgC6VSIi-UO0EQ8dhBnLkf6sMfFa1Q",
+    authDomain: "portfoliocontactextraction.firebaseapp.com",
+    projectId: "portfoliocontactextraction",
+    storageBucket: "portfoliocontactextraction.appspot.com",
+    messagingSenderId: "401274880352",
+    appId: "1:401274880352:web:cd2706cae2afcfe5a55e05",
+    measurementId: "G-BK4J080M4G"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Form submit handler
+  document.getElementById("contactForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    
+    try {
+      await addDoc(collection(db, "contacts"), {
+        name: document.getElementById("NAME").value,
+        email: document.getElementById("EMAIL").value,
+        phone: document.getElementById("CONTACTNUMBER").value,
+        message: document.getElementById("feedback").value,
+        timestamp: new Date()
+      });
+      alert("Message sent successfully!");
+      document.getElementById("contactForm").reset();
+    } catch (error) {
+      console.error("Error sending message:", error);
+      alert("Error! Could not send your message.");
+    }
+  });
+
+      
          
          $('#myCarousel').carousel({
             interval: false
@@ -508,56 +546,7 @@
             $(".carousel").on("touchend", function(){
                 $(this).off("touchmove");
             });
-         });
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-import { getDatabase, ref, push, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
-    // Firebase config
-   const firebaseConfig = {
-  apiKey: "AIzaSyDWpSgC6VSIi-UO0EQ8dhBnLkf6sMfFa1Q",
-  authDomain: "portfoliocontactextraction.firebaseapp.com",
-  projectId: "portfoliocontactextraction",
-  storageBucket: "portfoliocontactextraction.firebasestorage.app",
-  messagingSenderId: "401274880352",
-  appId: "1:401274880352:web:cd2706cae2afcfe5a55e05",
-  measurementId: "G-BK4J080M4G"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
-    // Form submit handler
-    document.getElementById("contactForm").addEventListener("submit", contactExtraction)
-async function contactExtraction(e) {
-        e.preventDefault();
-
-        const name = document.getElementById("NAME").value;
-        const email = document.getElementById("EMAIL").value;
-        const phone = document.getElementById("CONTACTNUMBER").value;
-        const message = document.getElementById("feedback").value;
-       try {
-            const contactsRef = ref(db, "contacts");
-            const newContactRef = push(contactsRef);
-
-            await addDoc(collection(db, "contacts"), {
-                name,
-                email,
-                phone,
-                message,
-                timestamp: Date.now()
-            });
-            alert("Message sent successfully!");
-            document.getElementById("contactForm").reset();
-        } catch (error) {
-            console.error("Error sending message:", error);
-            alert("Error! Could not send your message.");
-        }
-    });
+         });   
          
       </script>
    </body>
