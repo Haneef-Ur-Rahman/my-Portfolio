@@ -519,22 +519,24 @@
     };
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";     
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";    
+    import { initializeApp } from "firebase/app";
+    import { getAnalytics } from "firebase/analytics";
 
     // Firebase config
-    const firebaseConfig = {
-        apiKey: "AIzaSyBQE2k5okbmOWChl0IV5hbQxvDdP0tV5B4",
-        authDomain: "todo-86428.firebaseapp.com",
-        projectId: "todo-86428",
-        storageBucket: "todo-86428.appspot.com",
-        messagingSenderId: "998777510251",
-        appId: "1:998777510251:web:604a33d482b080b0f2942e",
-        measurementId: "G-Z4XW79WYWB"
-    };
+   const firebaseConfig = {
+  apiKey: "AIzaSyDWpSgC6VSIi-UO0EQ8dhBnLkf6sMfFa1Q",
+  authDomain: "portfoliocontactextraction.firebaseapp.com",
+  projectId: "portfoliocontactextraction",
+  storageBucket: "portfoliocontactextraction.firebasestorage.app",
+  messagingSenderId: "401274880352",
+  appId: "1:401274880352:web:cd2706cae2afcfe5a55e05",
+  measurementId: "G-BK4J080M4G"
+};
 
-    // Init Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
     // Form submit handler
     document.getElementById("contactForm").addEventListener("submit", async (e) => {
